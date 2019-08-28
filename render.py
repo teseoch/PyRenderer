@@ -82,9 +82,9 @@ def parse_arguments():
     parser.add_argument("--uv-scale", type=float, default=100.0);
     parser.add_argument("--uv-offset", type=float, nargs=2, default=[100.0, 100.0]);
     parser.add_argument("--background", "-B", help="background color",
-            choices=["d", "l", "n"], default=None);
+            choices=["d", "l", "n"], default="n");
     parser.add_argument("--transparent-bg", help="use transparent background",
-            action="store_true", default=None);
+            action="store_true", default=True);
     parser.add_argument("--up-direction", help="Upward direction",
             choices=["X", "-X", "Y", "-Y", "Z", "-Z"], default=None);
     parser.add_argument("--front-direction", help="Front direction",
