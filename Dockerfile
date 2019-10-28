@@ -6,7 +6,7 @@ libglu1-mesa-dev libglewmx1.5-dev libfftw3-dev libopenexr-dev && \
 pip install PyOpenGL mako && \
 git clone https://github.com/qnzhou/mitsuba.git && \
 cp mitsuba/build/config-linux-gcc.py mitsuba/config.py && \
-git clone https://github.com/Yixin-Hu/PyRenderer
+git clone https://github.com/teseoch/mitsuba.git
 
 WORKDIR mitsuba
 RUN scons
