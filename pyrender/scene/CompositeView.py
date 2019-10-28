@@ -39,6 +39,8 @@ class CompositeView(View):
         self.bmax = np.amax(vertices, axis=0);
         self.center = 0.5 * (self.bmin + self.bmax);
         self.scale = 2.0 / norm(self.bmax - self.bmin);
+        for w in self.views:
+            w.scale = self.scale
 
     @property
     def vertices(self):
