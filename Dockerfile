@@ -1,13 +1,12 @@
 FROM pymesh/pymesh:py2.7-slim
 WORKDIR /root/
 
-RUN apt-get update && apt-get install -y scons libboost-all-dev libxerces-c-dev libeigen3-dev \
+RUN apt-get update && apt-get install -y scons libboost-all-dev libxerces-c-dev libeigen3-dev vim\
 libglu1-mesa-dev libglewmx1.5-dev libfftw3-dev libopenexr-dev && \
 pip install PyOpenGL mako && \
 git clone https://github.com/qnzhou/mitsuba.git && \
 cp mitsuba/build/config-linux-gcc.py mitsuba/config.py && \
-git clone https://github.com/qnzhou/PyRenderer.git
-
+git clone https://github.com/Yixin-Hu/PyRenderer
 
 WORKDIR mitsuba
 RUN scons
