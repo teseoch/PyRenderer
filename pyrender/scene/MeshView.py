@@ -20,6 +20,7 @@ class MeshView(View):
             "line_color": color_name,
             "line_width": float, # default to 0.1
             "smooth_normal": bool,
+            "skip_spheres": bool,
             "bbox": [[min_x, min_y, min_z], [max_x, max_y, max_z]]
         }
         """
@@ -29,6 +30,7 @@ class MeshView(View):
         instance.line_width = setting.get("line_width", instance.line_width);
         instance.line_color = setting.get("line_color", "black");
         instance.smooth_normal = setting.get("smooth_normal", False);
+        instance.skip_spheres = setting.get("skip_spheres", False)
         if "bbox" in setting:
             instance.bmin = np.array(setting["bbox"][0]);
             instance.bmax = np.array(setting["bbox"][1]);
@@ -69,10 +71,11 @@ class MeshView(View):
         vertices, edges = pymesh.mesh_to_graph(self.mesh);
         lengths = norm(vertices[edges[:,0],:] - vertices[edges[:,1],:], axis=1);
         color = get_color(self.line_color);
-        for v in vertices:
-            ball = Sphere(v, radius);
-            ball.color = color;
-            self.primitives.append(ball);
+        if not self.skip_spheres:
+            for v in vertices:
+                ball = Sphere(v, radius);
+                ball.color = color;
+                self.primitives.append(ball);
 
         for e,l in zip(edges, lengths):
             if l <= 0.5 * radius : continue;
